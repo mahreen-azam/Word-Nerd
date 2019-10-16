@@ -54,6 +54,9 @@
                                         <state key="normal" title="  View Saved Words  ">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="eBO-WS-JVe" kind="push" id="YoE-5X-Ueh"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YRI-nJ-mtz">
                                         <rect key="frame" x="0.0" y="140" width="213" height="40"/>
@@ -112,6 +115,152 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bsL-FM-eZf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="497" y="21"/>
+        </scene>
+        <!--Saved Words List View Controller-->
+        <scene sceneID="sS8-Iq-Tnb">
+            <objects>
+                <viewController id="eBO-WS-JVe" userLabel="Saved Words List View Controller" customClass="NotebooksListViewController" customModule="Mooskine" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OWS-Hu-2Fa"/>
+                        <viewControllerLayoutGuide type="bottom" id="Eus-Ji-kvt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="p1K-dh-rOl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F3R-qF-0RZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SavedWordsListCell" id="yof-OE-Ww9" userLabel="SavedWordsListCell" customClass="NotebookCell" customModule="Mooskine" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yof-OE-Ww9" id="QWd-A8-P4I">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8C-iW-JfV">
+                                                    <rect key="frame" x="31" y="11.5" width="45" height="21"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Word Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIP-Oe-Gju">
+                                                    <rect key="frame" x="274.5" y="14.5" width="67.5" height="14.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                    <color key="textColor" red="0.003010978457" green="0.70323187109999996" blue="0.89525973800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="yIP-Oe-Gju" firstAttribute="trailing" secondItem="QWd-A8-P4I" secondAttribute="trailingMargin" constant="8" id="LiZ-Z1-72r"/>
+                                                <constraint firstItem="yIP-Oe-Gju" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="G8C-iW-JfV" secondAttribute="trailing" constant="8" id="VeN-5t-lyj"/>
+                                                <constraint firstItem="G8C-iW-JfV" firstAttribute="centerY" secondItem="QWd-A8-P4I" secondAttribute="centerY" id="aKJ-8b-swC"/>
+                                                <constraint firstItem="yIP-Oe-Gju" firstAttribute="centerY" secondItem="QWd-A8-P4I" secondAttribute="centerY" id="pWi-1O-FZp"/>
+                                                <constraint firstItem="G8C-iW-JfV" firstAttribute="leading" secondItem="QWd-A8-P4I" secondAttribute="leadingMargin" constant="16" id="uEo-bQ-1yI"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="obz-Oz-G5S" kind="push" id="3vX-P1-J5f"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="F3R-qF-0RZ" firstAttribute="top" secondItem="p1K-dh-rOl" secondAttribute="top" id="JXL-xr-bhE"/>
+                            <constraint firstItem="F3R-qF-0RZ" firstAttribute="leading" secondItem="p1K-dh-rOl" secondAttribute="leading" id="jfn-HI-h7z"/>
+                            <constraint firstItem="Eus-Ji-kvt" firstAttribute="top" secondItem="F3R-qF-0RZ" secondAttribute="bottom" id="tBu-P5-odz"/>
+                            <constraint firstAttribute="trailing" secondItem="F3R-qF-0RZ" secondAttribute="trailing" id="vln-90-CTi"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bDx-qK-Dy2"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Saved Words Lists" id="jGh-Aa-m4N">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="6U2-jS-5Hn"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lxd-Bt-MMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2145" y="19"/>
+        </scene>
+        <!--Saved Words View Controller-->
+        <scene sceneID="btK-Zg-dhq">
+            <objects>
+                <viewController id="obz-Oz-G5S" userLabel="Saved Words View Controller" customClass="NotebooksListViewController" customModule="Mooskine" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dd5-DC-uYp"/>
+                        <viewControllerLayoutGuide type="bottom" id="TDd-xs-0Qq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LpW-Ir-pIZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u1P-Ww-Zg8">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SavedWordsCell" id="OAp-yB-20B" userLabel="SavedWordsCell" customClass="NotebookCell" customModule="Mooskine" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OAp-yB-20B" id="mmQ-xg-qhq">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBD-lK-HuI">
+                                                    <rect key="frame" x="31" y="11.5" width="45" height="21"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Word Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yO-hc-N2M">
+                                                    <rect key="frame" x="274.5" y="14.5" width="67.5" height="14.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                    <color key="textColor" red="0.003010978457" green="0.70323187109999996" blue="0.89525973800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="fBD-lK-HuI" firstAttribute="centerY" secondItem="mmQ-xg-qhq" secondAttribute="centerY" id="DJ6-T3-6aE"/>
+                                                <constraint firstItem="3yO-hc-N2M" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fBD-lK-HuI" secondAttribute="trailing" constant="8" id="OS5-lc-lam"/>
+                                                <constraint firstItem="3yO-hc-N2M" firstAttribute="trailing" secondItem="mmQ-xg-qhq" secondAttribute="trailingMargin" constant="8" id="WJO-w2-wlL"/>
+                                                <constraint firstItem="3yO-hc-N2M" firstAttribute="centerY" secondItem="mmQ-xg-qhq" secondAttribute="centerY" id="ra8-01-kh6"/>
+                                                <constraint firstItem="fBD-lK-HuI" firstAttribute="leading" secondItem="mmQ-xg-qhq" secondAttribute="leadingMargin" constant="16" id="xNH-Zn-0St"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="obz-Oz-G5S" id="ll3-q8-H90"/>
+                                    <outlet property="delegate" destination="obz-Oz-G5S" id="kHg-kj-hka"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ry7-m0-LVl">
+                                <rect key="frame" x="81" y="598" width="213" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.28094696460000002" green="0.49432411529999998" blue="0.23657014700000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                <state key="normal" title="Quiz Me!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="u1P-Ww-Zg8" secondAttribute="trailing" id="3sn-tQ-hB2"/>
+                            <constraint firstItem="u1P-Ww-Zg8" firstAttribute="top" secondItem="LpW-Ir-pIZ" secondAttribute="top" id="EvY-1u-by9"/>
+                            <constraint firstItem="u1P-Ww-Zg8" firstAttribute="leading" secondItem="LpW-Ir-pIZ" secondAttribute="leading" id="PT0-gw-u0j"/>
+                            <constraint firstItem="TDd-xs-0Qq" firstAttribute="top" secondItem="u1P-Ww-Zg8" secondAttribute="bottom" id="X7G-Ni-b0A"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7sh-Lp-UHO"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Saved Words" id="Q2e-bH-OF5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E0A-T5-woh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2901.5999999999999" y="17.541229385307346"/>
         </scene>
     </scenes>
 </document>
