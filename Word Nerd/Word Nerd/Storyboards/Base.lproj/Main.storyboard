@@ -47,8 +47,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="saveWord:" destination="1TH-ii-SkT" eventType="touchUpInside" id="Bz1-20-sD6"/>
-                                            <action selector="saveWordTapped:" destination="1TH-ii-SkT" eventType="touchUpInside" id="1GU-En-1pT"/>
+                                            <action selector="saveWordTapped:" destination="1TH-ii-SkT" eventType="touchUpInside" id="vrS-YG-z7W"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24P-XJ-7tS">
@@ -70,7 +69,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="newWordTapped:" destination="1TH-ii-SkT" eventType="touchUpInside" id="l3P-4S-lOv"/>
+                                            <action selector="newWordTapped:" destination="1TH-ii-SkT" eventType="touchUpInside" id="yCQ-f1-3cU"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -100,7 +99,11 @@
                         <viewLayoutGuide key="safeArea" id="EVc-Ag-3X1"/>
                     </view>
                     <navigationItem key="navigationItem" id="Bbs-UD-4XV">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="search" id="Xmz-NE-YJo"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="search" id="Xmz-NE-YJo">
+                            <connections>
+                                <action selector="searchButtonTapped:" destination="1TH-ii-SkT" id="YDl-qO-MHf"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="definitionLabel" destination="YLz-lb-KB1" id="FMB-5d-aAO"/>
