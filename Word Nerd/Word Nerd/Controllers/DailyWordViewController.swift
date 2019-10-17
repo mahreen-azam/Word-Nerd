@@ -27,7 +27,7 @@ class DailyWordViewController: UIViewController {
     
    // MARK: Button Functions
     @IBAction func saveWordTapped(_ sender: Any) {
-        // Need to pass current word and definition to the next view controller. User should be allowed to select a list. If no lists exist, let them create a new list and afterwards they should be able to save that word into that list if they tap on it. (have global variable that hold the word and definition variables. Once they are succesffully saved into a notebook, clear the variables to be nil. 
+        // Need to pass current word and definition to the next view controller. User should be allowed to select a list. If no lists exist, let them create a new list and afterwards they should be able to save that word into that list if they tap on it. (have global variable that hold the word and definition variables. Once they are succesffully saved into a notebook, clear the variables to be nil.
     }
     
     @IBAction func newWordTapped(_ sender: Any) {
