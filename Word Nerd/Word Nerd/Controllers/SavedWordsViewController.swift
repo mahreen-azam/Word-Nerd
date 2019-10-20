@@ -1,5 +1,5 @@
 //
-//  SavedWordsListsViewController.swift
+//  SavedWordsViewController.swift
 //  Word Nerd
 //
 //  Created by Mahreen Azam on 10/20/19.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
+class SavedWordsViewController: UIViewController, UITableViewDataSource {
     
     //MARK: Outlets
     
     // MARK: Global Variables
-    var savedWords = ["Hello", "Mom", "Dad"]
-    var savedDefintions = ["A greeting", "Female parent", "Male parent"]
+    var savedWords = ["Hello", "Mom"]
+    var savedDefintions = ["A greeting", "Female parent"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SavedWordsListsCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SavedWordsCell")!
         
         cell.textLabel?.text = savedWords[indexPath.row]
         cell.detailTextLabel?.text = savedDefintions[indexPath.row]
