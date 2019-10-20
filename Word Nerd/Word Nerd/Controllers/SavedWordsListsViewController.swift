@@ -13,7 +13,8 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
     //MARK: Outlets
     
     // MARK: Global Variables
-    var savedWordsDictTemp = ["Hello": "A greeting", "Mom": "Female parent", "Dad": "Male parent"]
+    var savedWords = ["Hello", "Mom", "Dad"]
+    var savedDefintions = ["A greeting", "Female parent", "Male parent"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,14 +23,15 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return savedWordsDictTemp.count
+        return savedWords.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedWordsListCell")!
         
-        cell.textLabel?.text = "Hello:"
-        cell.detailTextLabel?.text = "World"
+        cell.textLabel?.text = savedWords[indexPath.row]
+        cell.detailTextLabel?.text = savedDefintions[indexPath.row]
+        
         return cell
     }
 }
