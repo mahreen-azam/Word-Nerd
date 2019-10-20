@@ -137,7 +137,7 @@
         <!--Saved Words List View Controller-->
         <scene sceneID="sS8-Iq-Tnb">
             <objects>
-                <viewController id="eBO-WS-JVe" userLabel="Saved Words List View Controller" customClass="NotebooksListViewController" customModule="Word_Nerd" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eBO-WS-JVe" userLabel="Saved Words List View Controller" customClass="SavedWordsListsViewController" customModule="Word_Nerd" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OWS-Hu-2Fa"/>
                         <viewControllerLayoutGuide type="bottom" id="Eus-Ji-kvt"/>
@@ -150,39 +150,38 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SavedWordsListCell" id="yof-OE-Ww9" userLabel="SavedWordsListCell" customClass="NotebookCell" customModule="Word_Nerd" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SavedWordsListCell" textLabel="jCf-NR-7Y9" detailTextLabel="GzE-Ew-oww" style="IBUITableViewCellStyleValue1" id="yof-OE-Ww9" userLabel="SavedWordsListCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yof-OE-Ww9" id="QWd-A8-P4I">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8C-iW-JfV">
-                                                    <rect key="frame" x="31" y="11.5" width="45" height="21"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jCf-NR-7Y9">
+                                                    <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Word Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIP-Oe-Gju">
-                                                    <rect key="frame" x="274.5" y="14.5" width="67.5" height="14.5"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                    <color key="textColor" red="0.003010978457" green="0.70323187109999996" blue="0.89525973800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GzE-Ew-oww">
+                                                    <rect key="frame" x="296" y="12" width="44" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="yIP-Oe-Gju" firstAttribute="trailing" secondItem="QWd-A8-P4I" secondAttribute="trailingMargin" constant="8" id="LiZ-Z1-72r"/>
-                                                <constraint firstItem="yIP-Oe-Gju" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="G8C-iW-JfV" secondAttribute="trailing" constant="8" id="VeN-5t-lyj"/>
-                                                <constraint firstItem="G8C-iW-JfV" firstAttribute="centerY" secondItem="QWd-A8-P4I" secondAttribute="centerY" id="aKJ-8b-swC"/>
-                                                <constraint firstItem="yIP-Oe-Gju" firstAttribute="centerY" secondItem="QWd-A8-P4I" secondAttribute="centerY" id="pWi-1O-FZp"/>
-                                                <constraint firstItem="G8C-iW-JfV" firstAttribute="leading" secondItem="QWd-A8-P4I" secondAttribute="leadingMargin" constant="16" id="uEo-bQ-1yI"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="obz-Oz-G5S" kind="push" id="3vX-P1-J5f"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="eBO-WS-JVe" id="aDy-hN-Ngi"/>
+                                    <outlet property="delegate" destination="eBO-WS-JVe" id="i8N-Rq-cqL"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
