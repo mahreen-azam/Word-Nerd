@@ -27,7 +27,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Definition:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLz-lb-KB1">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry, defintion not available. " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLz-lb-KB1">
                                 <rect key="frame" x="58" y="215.5" width="287" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="bCb-8t-OZx"/>
@@ -48,6 +48,7 @@
                                         </state>
                                         <connections>
                                             <action selector="saveWordTapped:" destination="1TH-ii-SkT" eventType="touchUpInside" id="vrS-YG-z7W"/>
+                                            <segue destination="eBO-WS-JVe" kind="push" identifier="saveToSavedWordsLists" id="dEh-iZ-UsM"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24P-XJ-7tS">
@@ -74,12 +75,16 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Placeholder Word:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5M-Ug-RcQ">
-                                <rect key="frame" x="89" y="170" width="197.5" height="27.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry, word not available. " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5M-Ug-RcQ">
+                                <rect key="frame" x="51" y="170" width="273.5" height="27.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Lsl-6O-du5">
+                                <rect key="frame" x="177" y="195" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.97551716033220714" blue="0.89958613415366229" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -107,6 +112,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="definitionLabel" destination="YLz-lb-KB1" id="FMB-5d-aAO"/>
+                        <outlet property="loadingIndicator" destination="Lsl-6O-du5" id="Epi-72-ZZr"/>
                         <outlet property="newWordButton" destination="YRI-nJ-mtz" id="7zB-bL-IPQ"/>
                         <outlet property="saveWordButton" destination="Pmf-mp-OGA" id="97S-mB-jDf"/>
                         <outlet property="searchButton" destination="Xmz-NE-YJo" id="iRf-wy-C66"/>
@@ -195,8 +201,15 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Saved Words Lists" id="jGh-Aa-m4N">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="6U2-jS-5Hn"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="xLY-Mb-eo3">
+                            <connections>
+                                <action selector="addList:" destination="eBO-WS-JVe" id="Glk-wV-ajx"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="F3R-qF-0RZ" id="adZ-lX-YDX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lxd-Bt-MMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -215,7 +228,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u1P-Ww-Zg8">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="579"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SavedWordsCell" textLabel="JBF-0O-RaT" detailTextLabel="eQi-Yw-H72" style="IBUITableViewCellStyleValue1" id="OAp-yB-20B" userLabel="SavedWordsCell">
@@ -248,9 +261,8 @@
                                     <outlet property="delegate" destination="obz-Oz-G5S" id="BAA-E1-y3J"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ry7-m0-LVl">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ry7-m0-LVl">
                                 <rect key="frame" x="81" y="598" width="213" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.28094696460000002" green="0.49432411529999998" blue="0.23657014700000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                 <state key="normal" title="Quiz Me!">
@@ -263,7 +275,10 @@
                             <constraint firstAttribute="trailing" secondItem="u1P-Ww-Zg8" secondAttribute="trailing" id="3sn-tQ-hB2"/>
                             <constraint firstItem="u1P-Ww-Zg8" firstAttribute="top" secondItem="LpW-Ir-pIZ" secondAttribute="top" id="EvY-1u-by9"/>
                             <constraint firstItem="u1P-Ww-Zg8" firstAttribute="leading" secondItem="LpW-Ir-pIZ" secondAttribute="leading" id="PT0-gw-u0j"/>
-                            <constraint firstItem="TDd-xs-0Qq" firstAttribute="top" secondItem="u1P-Ww-Zg8" secondAttribute="bottom" id="X7G-Ni-b0A"/>
+                            <constraint firstItem="ry7-m0-LVl" firstAttribute="top" secondItem="u1P-Ww-Zg8" secondAttribute="bottom" constant="19" id="UXJ-OD-LZ7"/>
+                            <constraint firstItem="TDd-xs-0Qq" firstAttribute="top" secondItem="u1P-Ww-Zg8" secondAttribute="bottom" constant="88" id="X7G-Ni-b0A"/>
+                            <constraint firstItem="ry7-m0-LVl" firstAttribute="centerX" secondItem="u1P-Ww-Zg8" secondAttribute="centerX" id="dnd-hC-Vhh"/>
+                            <constraint firstItem="ry7-m0-LVl" firstAttribute="leading" secondItem="7sh-Lp-UHO" secondAttribute="leading" constant="81" id="gJi-fu-jEO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7sh-Lp-UHO"/>
                     </view>
@@ -275,4 +290,7 @@
             <point key="canvasLocation" x="2901.5999999999999" y="17.541229385307346"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="YoE-5X-Ueh"/>
+    </inferredMetricsTieBreakers>
 </document>

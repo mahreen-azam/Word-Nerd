@@ -17,18 +17,26 @@ class DailyWordViewController: UIViewController {
     @IBOutlet weak var viewSavedWordsButton: UIButton!
     @IBOutlet weak var newWordButton: UIButton!
     @IBOutlet weak var searchButton: UIBarButtonItem!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    
+    // MARK: Global Variables
+    var currentWord:String?
+    var currentDefintion: String?
     
     // MARK: View Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadingIndicator.isAnimating == true
         WordnikClient.getWordOfTheDay(completion: handleWordOfDayResponse(success:error:))
     }
     
    // MARK: Button Functions
     @IBAction func saveWordTapped(_ sender: Any) {
         print("save word tapped")
+    
         // Need to pass current word and definition to the next view controller. User should be allowed to select a list. If no lists exist, let them create a new list and afterwards they should be able to save that word into that list if they tap on it. (have global variable that hold the word and definition variables. Once they are succesffully saved into a notebook, clear the variables to be nil.
+
     }
     
     @IBAction func newWordTapped(_ sender: Any) {
@@ -44,27 +52,37 @@ class DailyWordViewController: UIViewController {
     
     // MARK: Response Handlers
     func handleWordOfDayResponse(success: WordOfTheDay?, error: Error?) {
+        
         DispatchQueue.main.async {
-            // self.setLoggingIn(false)
+            self.loadingIndicator.isAnimating == false
             if success != nil {
-                self.wordLabel.text = success!.word
+                self.wordLabel.text = success!.word + ":"
+                self.currentWord = success!.word + ":"
                 self.definitionLabel.text = success!.definitions[0].text
-                
+                self.currentDefintion = success!.definitions[0].text
+                // Add the word to core data so that it displays old word while loading 
             } else {
                 self.showFailure(title: "Failed to get Word of the Day", message: error?.localizedDescription ?? "")
             }
         }
     }
-    
-    // MARK: Error Handlers
+   
+    //MARK: Helper Functions
     func showFailure(title: String, message: String) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertVC, animated: true)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "saveToSavedWordsLists" {
+            let savedWordsListsVC = segue.destination as! SavedWordsListsViewController
+            savedWordsListsVC.wordToSave = "Saved Word" // Update these to be what is the current word //currentWord
+            savedWordsListsVC.definitionToSave = "Saved Definition" // currentDefintion
+        }
+    }
+    
 }
-
 
 // Extra things to come back to: Make buttons with rounded corners, set up new word button, setup search 
 
