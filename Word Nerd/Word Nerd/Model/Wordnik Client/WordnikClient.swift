@@ -11,7 +11,7 @@ import Foundation
 class WordnikClient {
     
     //MARK: Global Variables
-    static let apiKey = ""  // Update this to have api key!!!!
+    static let apiKey = "98bdnkzv80srv16d92cmn74sud66zrwefmux6qkj9o2hdmw08" 
     static var searchWord = ""
     
     enum Endpoints {

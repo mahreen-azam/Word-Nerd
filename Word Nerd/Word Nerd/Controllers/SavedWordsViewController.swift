@@ -11,7 +11,7 @@ import UIKit
 class SavedWordsViewController: UIViewController, UITableViewDataSource {
     
     //MARK: Outlets
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!   // Make these fields large enough to display defintion. If not, when you tap on it it should show you the whole definition. I perfer it all be on one vc. 
     
     // MARK: Global Variables
     var savedWords = ["Hello", "Mom"] // There needs to be a fetch call made to get all the words for a list. The words passed from the last vc can only be appended after this fetch has been made. We'll probably have to update the code to add them 

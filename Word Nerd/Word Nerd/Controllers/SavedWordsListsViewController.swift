@@ -24,13 +24,13 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         
         // Make a fetch call and see if there are any existing lists. If there are, populate the fields with them, if not, pop the add list alert (?)
+        
         if (wordToSave != nil) && (definitionToSave != nil) {
             self.instructions.text = "   Instructions: Tap on a list to save the word."
 
         } else {
             self.instructions.text = "   Instructions: Tap on a list to see it's saved words."
         }
-        //Add an instructions label (?) If there is a wordToSave/defintion: "Tap on a list to save the word and defintion" else "Tap on a list to see saved words
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -111,7 +111,7 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedWordsListsCell")!
         
         cell.textLabel?.text = savedLists[indexPath.row]
-       // cell.detailTextLabel?.text = savedDefintions[indexPath.row] // This should be the number of saved words assoicated with this list (?)
+        cell.detailTextLabel?.text =  ""//savedDefintions[indexPath.row] // This should be the number of saved words assoicated with this list (?)
         
         return cell
     }

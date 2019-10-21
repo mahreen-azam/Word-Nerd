@@ -12,7 +12,7 @@ class DailyWordViewController: UIViewController {
     
     // MARK: Outlets
     @IBOutlet weak var wordLabel: UILabel!
-    @IBOutlet weak var definitionLabel: UILabel!
+    @IBOutlet weak var definitionLabel: UILabel!    //This label area needs to be made to display the whole definition
     @IBOutlet weak var saveWordButton: UIButton!
     @IBOutlet weak var viewSavedWordsButton: UIButton!
     @IBOutlet weak var newWordButton: UIButton!
@@ -27,7 +27,7 @@ class DailyWordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadingIndicator.isAnimating == true
+        loadingIndicator.isAnimating == true // Look at this. I don't think you did this right.
         WordnikClient.getWordOfTheDay(completion: handleWordOfDayResponse(success:error:))
     }
     
@@ -77,8 +77,11 @@ class DailyWordViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "saveToSavedWordsLists" {
             let savedWordsListsVC = segue.destination as! SavedWordsListsViewController
-            savedWordsListsVC.wordToSave = "Saved Word" // Update these to be what is the current word //currentWord
-            savedWordsListsVC.definitionToSave = "Saved Definition" // currentDefintion
+            
+            if (currentWord != nil) && (currentDefintion != nil) {
+                savedWordsListsVC.wordToSave = currentWord!
+                savedWordsListsVC.definitionToSave = currentDefintion! 
+            }
         }
     }
     
