@@ -12,20 +12,30 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
     
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var instructions: UILabel!
     
     // MARK: Global Variables
     var wordToSave:String?
     var definitionToSave:String?
-    // var savedWords = ["Hello", "Mom", "Dad"]
-   //  var savedDefintions = ["A greeting", "Female parent", "Male parent"]
     var savedLists:[String] = [] // This needs to be filled in based on the fetch request that was made
     
+    // MARK: View Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Make a fetch call and see if there are any existing lists. If there are, populate the fields with them, if not, pop the add list alert (?)
-        
+        if (wordToSave != nil) && (definitionToSave != nil) {
+            self.instructions.text = "   Instructions: Tap on a list to save the word."
+
+        } else {
+            self.instructions.text = "   Instructions: Tap on a list to see it's saved words."
+        }
         //Add an instructions label (?) If there is a wordToSave/defintion: "Tap on a list to save the word and defintion" else "Tap on a list to see saved words
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        wordToSave = nil
+        definitionToSave = nil
     }
     
     // MARK: Button Functions
@@ -74,8 +84,7 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
     }
     
     //MARK: Delete List Functions
-    
-    func deleteNotebook(at indexPath: IndexPath) {
+    func deleteList(at indexPath: IndexPath) {
         self.savedLists.remove(at: indexPath.row)
         self.tableView.reloadData()
 //        let notebookToDelete = fetchedResultsController.object(at: indexPath)
@@ -109,8 +118,8 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
-        case .delete: deleteNotebook(at: indexPath)
-        default: () // Unsupported
+        case .delete: deleteList(at: indexPath)
+        default: ()
         }
     }
 }

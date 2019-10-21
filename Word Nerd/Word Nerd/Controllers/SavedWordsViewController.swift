@@ -11,6 +11,7 @@ import UIKit
 class SavedWordsViewController: UIViewController, UITableViewDataSource {
     
     //MARK: Outlets
+    @IBOutlet weak var tableView: UITableView!
     
     // MARK: Global Variables
     var savedWords = ["Hello", "Mom"] // There needs to be a fetch call made to get all the words for a list. The words passed from the last vc can only be appended after this fetch has been made. We'll probably have to update the code to add them 
@@ -18,6 +19,16 @@ class SavedWordsViewController: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    //MARK: Delete Saved Words Functions
+    func deleteSavedWords(at indexPath: IndexPath) {
+        self.savedWords.remove(at: indexPath.row)
+        self.savedDefintions.remove(at: indexPath.row)
+        self.tableView.reloadData()
+        //        let notebookToDelete = fetchedResultsController.object(at: indexPath)
+        //        dataController.viewContext.delete(notebookToDelete)
+        //        try? dataController.viewContext.save()
     }
     
     // Make the table not tappable. (Remove the arrow too) Add functionality for Quiz me. Update quize me button. Make the words be based off of the tapped list. Add core data and persistance. 
@@ -32,6 +43,13 @@ class SavedWordsViewController: UIViewController, UITableViewDataSource {
         cell.detailTextLabel?.text = savedDefintions[indexPath.row]
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete: deleteSavedWords(at: indexPath)
+        default: ()
+        }
     }
 }
 

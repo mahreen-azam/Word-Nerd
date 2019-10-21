@@ -153,7 +153,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F3R-qF-0RZ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SavedWordsListsCell" textLabel="jCf-NR-7Y9" detailTextLabel="GzE-Ew-oww" style="IBUITableViewCellStyleValue1" id="yof-OE-Ww9" userLabel="SavedWordsListCell">
@@ -189,12 +189,22 @@
                                     <outlet property="delegate" destination="eBO-WS-JVe" id="i8N-Rq-cqL"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   Instructions: Tap on a list to see it's saved words." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8u-8B-eui">
+                                <rect key="frame" x="0.0" y="64" width="375" height="51"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="F3R-qF-0RZ" firstAttribute="top" secondItem="p1K-dh-rOl" secondAttribute="top" id="JXL-xr-bhE"/>
+                            <constraint firstItem="F3R-qF-0RZ" firstAttribute="top" secondItem="z8u-8B-eui" secondAttribute="bottom" constant="1" id="GGe-dW-Dos"/>
+                            <constraint firstItem="F3R-qF-0RZ" firstAttribute="top" secondItem="p1K-dh-rOl" secondAttribute="top" constant="116" id="JXL-xr-bhE"/>
+                            <constraint firstItem="z8u-8B-eui" firstAttribute="leading" secondItem="F3R-qF-0RZ" secondAttribute="leading" id="b7R-5l-M89"/>
                             <constraint firstItem="F3R-qF-0RZ" firstAttribute="leading" secondItem="p1K-dh-rOl" secondAttribute="leading" id="jfn-HI-h7z"/>
+                            <constraint firstItem="z8u-8B-eui" firstAttribute="top" secondItem="bDx-qK-Dy2" secondAttribute="top" id="sXJ-Td-Rtf"/>
                             <constraint firstItem="Eus-Ji-kvt" firstAttribute="top" secondItem="F3R-qF-0RZ" secondAttribute="bottom" id="tBu-P5-odz"/>
+                            <constraint firstItem="z8u-8B-eui" firstAttribute="trailing" secondItem="F3R-qF-0RZ" secondAttribute="trailing" id="uum-cU-m2P"/>
                             <constraint firstAttribute="trailing" secondItem="F3R-qF-0RZ" secondAttribute="trailing" id="vln-90-CTi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bDx-qK-Dy2"/>
@@ -208,12 +218,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="instructions" destination="z8u-8B-eui" id="5p7-Cl-Hva"/>
                         <outlet property="tableView" destination="F3R-qF-0RZ" id="adZ-lX-YDX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lxd-Bt-MMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2145" y="19"/>
+            <point key="canvasLocation" x="2144.8000000000002" y="18.440779610194905"/>
         </scene>
         <!--Saved Words View Controller-->
         <scene sceneID="btK-Zg-dhq">
@@ -284,6 +295,9 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Saved Words" id="Q2e-bH-OF5"/>
+                    <connections>
+                        <outlet property="tableView" destination="u1P-Ww-Zg8" id="wDy-aW-SeR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E0A-T5-woh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
