@@ -85,8 +85,6 @@ class DailyWordViewController: UIViewController {
     
 }
 
-// Extra things to come back to: Make buttons with rounded corners, set up new word button, setup search
-
 // Things to do:
 // - Update text fields to display text properly.
 //- Add core data for:
@@ -94,5 +92,5 @@ class DailyWordViewController: UIViewController {
 // -- Saved Words Lists: The app should store all lists created. Make a model that associates saved words with lists.
 // If a list is deleted, so are its saved words (pop an alert for this (?))
 // -- Saved Words: The app should store saved words.
-// - Add functionality for: new word, search, quiz me (?)
+// - Add functionality for: new word, search, quiz me (?)., for new word: have an option difficulty (?),
 // Make buttons and text pretty :)
