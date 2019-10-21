@@ -16,8 +16,8 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
     // MARK: Global Variables
     var wordToSave:String?
     var definitionToSave:String?
-    var savedWords = ["Hello", "Mom", "Dad"]
-    var savedDefintions = ["A greeting", "Female parent", "Male parent"]
+    // var savedWords = ["Hello", "Mom", "Dad"]
+   //  var savedDefintions = ["A greeting", "Female parent", "Male parent"]
     var savedLists:[String] = [] // This needs to be filled in based on the fetch request that was made
     
     override func viewDidLoad() {
@@ -73,6 +73,16 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
         // try? dataController.viewContext.save()
     }
     
+    //MARK: Delete List Functions
+    
+    func deleteNotebook(at indexPath: IndexPath) {
+        self.savedLists.remove(at: indexPath.row)
+        self.tableView.reloadData()
+//        let notebookToDelete = fetchedResultsController.object(at: indexPath)
+//        dataController.viewContext.delete(notebookToDelete)
+//        try? dataController.viewContext.save()
+    }
+    
     // MARK: Helper Functions
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let savedWordsVC = segue.destination as! SavedWordsViewController
@@ -95,5 +105,12 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
        // cell.detailTextLabel?.text = savedDefintions[indexPath.row] // This should be the number of saved words assoicated with this list (?)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete: deleteNotebook(at: indexPath)
+        default: () // Unsupported
+        }
     }
 }
