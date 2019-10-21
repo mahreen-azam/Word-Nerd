@@ -27,15 +27,13 @@ class DailyWordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadingIndicator.isAnimating == true // Look at this. I don't think you did this right.
+        loadingIndicator.isHidden = false
         WordnikClient.getWordOfTheDay(completion: handleWordOfDayResponse(success:error:))
     }
     
    // MARK: Button Functions
     @IBAction func saveWordTapped(_ sender: Any) {
         print("save word tapped")
-    
-        // Need to pass current word and definition to the next view controller. User should be allowed to select a list. If no lists exist, let them create a new list and afterwards they should be able to save that word into that list if they tap on it. (have global variable that hold the word and definition variables. Once they are succesffully saved into a notebook, clear the variables to be nil.
 
     }
     
@@ -54,7 +52,7 @@ class DailyWordViewController: UIViewController {
     func handleWordOfDayResponse(success: WordOfTheDay?, error: Error?) {
         
         DispatchQueue.main.async {
-            self.loadingIndicator.isAnimating == false
+            self.loadingIndicator.isHidden = true
             if success != nil {
                 self.wordLabel.text = success!.word + ":"
                 self.currentWord = success!.word + ":"
@@ -87,7 +85,14 @@ class DailyWordViewController: UIViewController {
     
 }
 
-// Extra things to come back to: Make buttons with rounded corners, set up new word button, setup search 
+// Extra things to come back to: Make buttons with rounded corners, set up new word button, setup search
 
-
-
+// Things to do:
+// - Update text fields to display text properly.
+//- Add core data for:
+// -- Word of the Day: if a word has been called previously, the app should display that while loading new word
+// -- Saved Words Lists: The app should store all lists created. Make a model that associates saved words with lists.
+// If a list is deleted, so are its saved words (pop an alert for this (?))
+// -- Saved Words: The app should store saved words.
+// - Add functionality for: new word, search, quiz me (?)
+// Make buttons and text pretty :)

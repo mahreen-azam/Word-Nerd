@@ -31,6 +31,10 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
         } else {
             self.instructions.text = "   Instructions: Tap on a list to see it's saved words."
         }
+        
+        if savedLists == [] {
+            presentAddListAlert()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
