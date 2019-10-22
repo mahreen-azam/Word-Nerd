@@ -40,12 +40,7 @@ class SavedWordsViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // let cell = tableView.dequeueReusableCell(withIdentifier: "SavedWordsCell")!
-        
- //       cell.textLabel?.text = savedWords[indexPath.row]
-//        cell.detailTextLabel?.text = savedDefintions[indexPath.row]
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SavedWordsCell2", for: indexPath) as! SavedWordsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SavedWordsCell", for: indexPath) as! SavedWordsTableViewCell
         cell.wordLabel.text = savedWords[indexPath.row]
         cell.definitionLabel.text = savedDefintions[indexPath.row]
         

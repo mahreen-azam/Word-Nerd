@@ -86,11 +86,21 @@ class DailyWordViewController: UIViewController {
 }
 
 // Things to do:
-// -Update tables to display text properly 
 //- Add core data for:
-// -- Word of the Day: if a word has been called previously, the app should display that while loading new word
-// -- Saved Words Lists: The app should store all lists created. Make a model that associates saved words with lists.
-// If a list is deleted, so are its saved words (pop an alert for this (?))
-// -- Saved Words: The app should store saved words.
+// --- Word of the Day: if a word has been called previously, the app should display that while loading new word
+// --- Saved Words Lists: The app should store all lists created. Make a model that associates saved words with lists.
+//  If a list is deleted, so are its saved words (pop an alert for this (?))
+// --- Saved Words: The app should store saved words.
+
+
+
+
 // - Add functionality for: new word, search, quiz me (?)., for new word: have an option difficulty (?),
 // Make buttons and text pretty :)
+
+
+
+
+
+
+// Get someone to look at your table constraints (?)
