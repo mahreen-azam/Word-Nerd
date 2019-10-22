@@ -19,6 +19,9 @@ class SavedWordsViewController: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 300
     }
     
     //MARK: Delete Saved Words Functions
@@ -37,10 +40,14 @@ class SavedWordsViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SavedWordsCell")!
+        // let cell = tableView.dequeueReusableCell(withIdentifier: "SavedWordsCell")!
         
-        cell.textLabel?.text = savedWords[indexPath.row]
-        cell.detailTextLabel?.text = savedDefintions[indexPath.row]
+ //       cell.textLabel?.text = savedWords[indexPath.row]
+//        cell.detailTextLabel?.text = savedDefintions[indexPath.row]
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SavedWordsCell2", for: indexPath) as! SavedWordsTableViewCell
+        cell.wordLabel.text = savedWords[indexPath.row]
+        cell.definitionLabel.text = savedDefintions[indexPath.row]
         
         return cell
     }

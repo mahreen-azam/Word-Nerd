@@ -12,7 +12,7 @@ class DailyWordViewController: UIViewController {
     
     // MARK: Outlets
     @IBOutlet weak var wordLabel: UILabel!
-    @IBOutlet weak var definitionLabel: UILabel!    //This label area needs to be made to display the whole definition
+    @IBOutlet weak var definitionLabel: UILabel! 
     @IBOutlet weak var saveWordButton: UIButton!
     @IBOutlet weak var viewSavedWordsButton: UIButton!
     @IBOutlet weak var newWordButton: UIButton!
@@ -55,9 +55,9 @@ class DailyWordViewController: UIViewController {
             self.loadingIndicator.isHidden = true
             if success != nil {
                 self.wordLabel.text = success!.word + ":"
-                self.currentWord = success!.word + ":"
+                self.currentWord = success!.word + ":" + "lotsssssfff"
                 self.definitionLabel.text = success!.definitions[0].text
-                self.currentDefintion = success!.definitions[0].text
+                self.currentDefintion = success!.definitions[0].text + "lotsssssfff fsfsdf fdfsdf"
                 // Add the word to core data so that it displays old word while loading 
             } else {
                 self.showFailure(title: "Failed to get Word of the Day", message: error?.localizedDescription ?? "")
