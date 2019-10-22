@@ -55,9 +55,9 @@ class DailyWordViewController: UIViewController {
             self.loadingIndicator.isHidden = true
             if success != nil {
                 self.wordLabel.text = success!.word + ":"
-                self.currentWord = success!.word + ":" + "lotsssssfff"
+                self.currentWord = success!.word + ":" + "filler"
                 self.definitionLabel.text = success!.definitions[0].text
-                self.currentDefintion = success!.definitions[0].text + "lotsssssfff fsfsdf fdfsdf"
+                self.currentDefintion = success!.definitions[0].text + "some filler text to make def longer"
                 // Add the word to core data so that it displays old word while loading 
             } else {
                 self.showFailure(title: "Failed to get Word of the Day", message: error?.localizedDescription ?? "")
@@ -92,6 +92,10 @@ class DailyWordViewController: UIViewController {
 //  If a list is deleted, so are its saved words (pop an alert for this (?))
 // --- Saved Words: The app should store saved words.
 
+// Need to make two types of data to store: Lists and Words. Lists have a name. (Possibly a total words count as well, but that might be intuitive) Words have a word and a definition.
+//Lists are saved when a user creates one. they are deleted when a user deletes
+//Words are saved AFTER a user saves it to a list. They are associated with that list. They are deleted when a user deletes them from their list OR when the list is deleted.
+//Need to make fetch requests that creates arrays with the stored data. This data is what the tables use to display data. Remember to refresh table views after something is added or deleted. 
 
 
 
