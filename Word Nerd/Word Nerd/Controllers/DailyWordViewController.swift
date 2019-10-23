@@ -11,7 +11,7 @@ import CoreData
 
 class DailyWordViewController: UIViewController {
     
-    // MARK: Outlets
+    // MARK: Outlets    // Delete unused outlets
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var definitionLabel: UILabel! 
     @IBOutlet weak var saveWordButton: UIButton!
@@ -23,8 +23,6 @@ class DailyWordViewController: UIViewController {
     // MARK: Global Variables
     var currentWord:String?
     var currentDefintion: String?
-    
-    // Data Model Variables:
     var dataController: DataController!
     
     // MARK: View Functions
@@ -49,7 +47,7 @@ class DailyWordViewController: UIViewController {
     }
     
     @IBAction func newWordTapped(_ sender: Any) {
-        print("new word tapped")  // You can probably delete this function
+        print("new word tapped")  
         // Call "randomWord" endpoint. Save word. Call "Search" endpoint for that randomWord. Update UI for word and definition IF a success is returned. Else, show error and do not update UI.
     }
     
