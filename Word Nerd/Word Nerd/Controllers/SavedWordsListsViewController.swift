@@ -18,9 +18,6 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
     // MARK: Global Variables
     var wordToSave:String?
     var definitionToSave:String?
-    var savedLists:[List] = []
-    
-    // Data Model Variables:
     var dataController: DataController!
     var fetchedResultsController:NSFetchedResultsController<List>!
     
@@ -31,9 +28,8 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "")
         do {
             try fetchedResultsController.performFetch()
-            print("fetch succeeded")
         } catch {
-            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+            self.showFailure(title: "Failed to get saved lists", message: error.localizedDescription)
         }
     }
     
@@ -49,7 +45,7 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
             self.instructions.text = "   Instructions: Tap on a list to see it's saved words."
         }
         
-        if savedLists == [] { // This needs to be, if fetchedResults contains no results
+        if fetchedResultsController.fetchedObjects?.count == 0 {
             presentAddListAlert()
         }
     }
@@ -65,7 +61,7 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
         presentAddListAlert()
     }
     
-    // MARK: Add List Functions
+    // MARK: Add and Delete List Functions
     func presentAddListAlert() {
         let alert = UIAlertController(title: "Add a List", message: "Enter a name for this list", preferredStyle: .alert)
         
@@ -103,7 +99,6 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
         self.tableView.reloadData()
     }
     
-    //MARK: Delete List Functions
     func deleteList(at indexPath: IndexPath) {
         let listToDelete = fetchedResultsController.object(at: indexPath)
         dataController.viewContext.delete(listToDelete)
@@ -114,6 +109,12 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
     }
     
     // MARK: Helper Functions
+    func showFailure(title: String, message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertVC, animated: true)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let savedWordsVC = segue.destination as! SavedWordsViewController
         if (wordToSave != nil) && (definitionToSave != nil) {
