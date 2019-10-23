@@ -31,25 +31,32 @@ class DailyWordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let hasStoredWord = UserDefaults.standard.value(forKey: "HasSavedWord") {
+            if hasStoredWord as! Bool {
+                self.wordLabel.text = UserDefaults.standard.value(forKey: "StoredWord") as! String
+                self.definitionLabel.text = UserDefaults.standard.value(forKey: "StoredDefinition") as! String
+            }
+        }
+        
         loadingIndicator.isHidden = false
         WordnikClient.getWordOfTheDay(completion: handleWordOfDayResponse(success:error:))
     }
     
    // MARK: Button Functions
     @IBAction func saveWordTapped(_ sender: Any) {
-        print("save word tapped") // You can probably delete this function 
+        print("save word tapped") // You can probably delete this function
 
     }
     
     @IBAction func newWordTapped(_ sender: Any) {
-        print("new word tapped")
+        print("new word tapped")  // You can probably delete this function
         // Call "randomWord" endpoint. Save word. Call "Search" endpoint for that randomWord. Update UI for word and definition IF a success is returned. Else, show error and do not update UI.
     }
     
     @IBAction func searchButtonTapped(_ sender: Any) {
         print("search tapped")
-        // Show an alert (?) that allows the user to enter the word that they want to search.
-        //  Call "Search" endpoint for the user's endpoint. Update UI for word and definition IF a success is returned. Else, show error and do not update UI.
+        // Show an alert (?) modal presentation (?) that allows the user to enter the word that they want to search.
+        //  Call "Search" endpoint for the user's endpoint. Update UI for word and definition IF a success is returned. Else, show error and do not update UI. Alert: sorry we could not find a defintion for that word
     }
     
     // MARK: Response Handlers
@@ -57,13 +64,18 @@ class DailyWordViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.loadingIndicator.isHidden = true
+            
             if success != nil {
-                self.wordLabel.text = success!.word + ":"
-                self.currentWord = success!.word + ":" + "filler"
-                self.definitionLabel.text = success!.definitions[0].text
-                self.currentDefintion = success!.definitions[0].text + "some filler text to make def longer"
-                // Add the word to core data so that it displays old word while loading
-                // Maybe this should be in the quick data 
+                UserDefaults.standard.setValue(true, forKey: "HasSavedWord")
+                
+                self.currentWord = success!.word + ":"
+                self.wordLabel.text = self.currentWord
+                UserDefaults.standard.setValue(self.currentWord, forKey: "StoredWord")
+                
+                self.currentDefintion = success!.definitions[0].text
+                self.definitionLabel.text = self.currentDefintion
+                UserDefaults.standard.setValue(self.currentDefintion, forKey: "StoredDefinition")
+                
             } else {
                 self.showFailure(title: "Failed to get Word of the Day", message: error?.localizedDescription ?? "")
             }
@@ -82,7 +94,6 @@ class DailyWordViewController: UIViewController {
         savedWordsListsVC.dataController = self.dataController
         
         if segue.identifier == "saveToSavedWordsLists" {
-            // let savedWordsListsVC = segue.destination as! SavedWordsListsViewController
             if (currentWord != nil) && (currentDefintion != nil) {
                 savedWordsListsVC.wordToSave = currentWord!
                 savedWordsListsVC.definitionToSave = currentDefintion! 
@@ -93,12 +104,8 @@ class DailyWordViewController: UIViewController {
 }
 
 // Things to do:
-//- Add core data for:
-// --- Word of the Day: if a word has been called previously, the app should display that while loading new word
-
 // - Add functionality for: new word, search, quiz me (?)., for new word: have an option difficulty (?),
 // Make buttons and text pretty :)
-
 
 
 // Get someone to look at your table constraints (?)
