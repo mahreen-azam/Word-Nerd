@@ -12,10 +12,20 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+     let dataController = DataController(modelName: "WordNerd")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+       
+        dataController.load()
+        
+        let navigationController = window?.rootViewController as! UINavigationController
+        let dailyWordViewController = navigationController.topViewController as! DailyWordViewController
+        dailyWordViewController.dataController = dataController
+        
+//         let c = navigationController.viewControllers[1]
+        
         return true
     }
 

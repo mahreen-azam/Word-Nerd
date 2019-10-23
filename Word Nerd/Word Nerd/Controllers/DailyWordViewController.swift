@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DailyWordViewController: UIViewController {
     
@@ -22,6 +23,9 @@ class DailyWordViewController: UIViewController {
     // MARK: Global Variables
     var currentWord:String?
     var currentDefintion: String?
+    
+    // Data Model Variables:
+    var dataController: DataController!
     
     // MARK: View Functions
     override func viewDidLoad() {
@@ -58,7 +62,8 @@ class DailyWordViewController: UIViewController {
                 self.currentWord = success!.word + ":" + "filler"
                 self.definitionLabel.text = success!.definitions[0].text
                 self.currentDefintion = success!.definitions[0].text + "some filler text to make def longer"
-                // Add the word to core data so that it displays old word while loading 
+                // Add the word to core data so that it displays old word while loading
+                // Maybe this should be in the quick data 
             } else {
                 self.showFailure(title: "Failed to get Word of the Day", message: error?.localizedDescription ?? "")
             }
@@ -73,9 +78,11 @@ class DailyWordViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let savedWordsListsVC = segue.destination as! SavedWordsListsViewController
+        savedWordsListsVC.dataController = self.dataController
+        
         if segue.identifier == "saveToSavedWordsLists" {
-            let savedWordsListsVC = segue.destination as! SavedWordsListsViewController
-            
+            // let savedWordsListsVC = segue.destination as! SavedWordsListsViewController
             if (currentWord != nil) && (currentDefintion != nil) {
                 savedWordsListsVC.wordToSave = currentWord!
                 savedWordsListsVC.definitionToSave = currentDefintion! 
@@ -95,7 +102,7 @@ class DailyWordViewController: UIViewController {
 // Need to make two types of data to store: Lists and Words. Lists have a name. (Possibly a total words count as well, but that might be intuitive) Words have a word and a definition.
 //Lists are saved when a user creates one. they are deleted when a user deletes
 //Words are saved AFTER a user saves it to a list. They are associated with that list. They are deleted when a user deletes them from their list OR when the list is deleted.
-//Need to make fetch requests that creates arrays with the stored data. This data is what the tables use to display data. Remember to refresh table views after something is added or deleted. 
+//Need to make fetch requests that creates arrays with the stored data. This data is what the tables use to display data. Remember to refresh table views after something is added or deleted.  
 
 
 

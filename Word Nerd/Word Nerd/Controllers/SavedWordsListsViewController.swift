@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
     
@@ -17,22 +18,38 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
     // MARK: Global Variables
     var wordToSave:String?
     var definitionToSave:String?
-    var savedLists:[String] = [] // This needs to be filled in based on the fetch request that was made
+    var savedLists:[List] = []
+    
+    // Data Model Variables:
+    var dataController: DataController!
+    var fetchedResultsController:NSFetchedResultsController<List>!
+    
+    fileprivate func setupFetchedResultsController() {
+        let fetchRequest:NSFetchRequest<List> = List.fetchRequest()
+        fetchRequest.sortDescriptors = []
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "")
+        do {
+            try fetchedResultsController.performFetch()
+            print("fetch succeeded")
+        } catch {
+            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+        }
+    }
     
     // MARK: View Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Make a fetch call and see if there are any existing lists. If there are, populate the fields with them, if not, pop the add list alert (?)
+
+        setupFetchedResultsController()
         
         if (wordToSave != nil) && (definitionToSave != nil) {
             self.instructions.text = "   Instructions: Tap on a list to save the word."
-
         } else {
             self.instructions.text = "   Instructions: Tap on a list to see it's saved words."
         }
         
-        if savedLists == [] {
+        if savedLists == [] { // This needs to be, if fetchedResults contains no results
             presentAddListAlert()
         }
     }
@@ -77,23 +94,23 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
         present(alert, animated: true, completion: nil)
     }
     
-    // Adds a new notebook to the end of the `notebooks` array
     func addList(name: String) {
-        self.savedLists.append(name)
+        let list = List(context: dataController.viewContext)
+        list.title = name
+        try? dataController.viewContext.save()
+        
+        setupFetchedResultsController()
         self.tableView.reloadData()
-       //  let notebook = Notebook(context: dataController.viewContext)
-       //  notebook.name = name
-        // notebook.creationDate = Date()
-        // try? dataController.viewContext.save()
     }
     
     //MARK: Delete List Functions
     func deleteList(at indexPath: IndexPath) {
-        self.savedLists.remove(at: indexPath.row)
+        let listToDelete = fetchedResultsController.object(at: indexPath)
+        dataController.viewContext.delete(listToDelete)
+        try? dataController.viewContext.save()
+        
+        setupFetchedResultsController()
         self.tableView.reloadData()
-//        let notebookToDelete = fetchedResultsController.object(at: indexPath)
-//        dataController.viewContext.delete(notebookToDelete)
-//        try? dataController.viewContext.save()
     }
     
     // MARK: Helper Functions
@@ -107,16 +124,16 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
     
     // MARK: Table Functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // return savedWords.count
-        return savedLists.count
+       return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedWordsListsCell")!
-        
-        cell.textLabel?.text = savedLists[indexPath.row]
-        cell.detailTextLabel?.text =  ""//savedDefintions[indexPath.row] // This should be the number of saved words assoicated with this list (?)
-        
+        let list =  fetchedResultsController.object(at: indexPath)
+
+        cell.textLabel?.text = list.title
+        cell.detailTextLabel?.text =  String(list.words!.count) + " words"
+       
         return cell
     }
     

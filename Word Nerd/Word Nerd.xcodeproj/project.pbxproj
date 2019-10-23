@@ -14,6 +14,8 @@
 		BA685D04235CC64400DF0AA8 /* SavedWordsListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA685D03235CC64400DF0AA8 /* SavedWordsListsViewController.swift */; };
 		BA685D06235CD17800DF0AA8 /* SavedWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA685D05235CD17800DF0AA8 /* SavedWordsViewController.swift */; };
 		BA685D0A235EA57B00DF0AA8 /* SavedWordsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA685D09235EA57B00DF0AA8 /* SavedWordsTableViewCell.swift */; };
+		BA685D0D235FD85800DF0AA8 /* WordNerd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA685D0B235FD85800DF0AA8 /* WordNerd.xcdatamodeld */; };
+		BA685D10235FDAC800DF0AA8 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA685D0F235FDAC800DF0AA8 /* DataController.swift */; };
 		BAF3D2652356BC85008B6187 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF3D2642356BC85008B6187 /* AppDelegate.swift */; };
 		BAF3D26A2356BC85008B6187 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAF3D2682356BC85008B6187 /* Main.storyboard */; };
 		BAF3D26C2356BC89008B6187 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAF3D26B2356BC89008B6187 /* Assets.xcassets */; };
@@ -29,6 +31,8 @@
 		BA685D03235CC64400DF0AA8 /* SavedWordsListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedWordsListsViewController.swift; sourceTree = "<group>"; };
 		BA685D05235CD17800DF0AA8 /* SavedWordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedWordsViewController.swift; sourceTree = "<group>"; };
 		BA685D09235EA57B00DF0AA8 /* SavedWordsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedWordsTableViewCell.swift; sourceTree = "<group>"; };
+		BA685D0C235FD85800DF0AA8 /* WordNerd.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WordNerd.xcdatamodel; sourceTree = "<group>"; };
+		BA685D0F235FDAC800DF0AA8 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		BAF3D2612356BC85008B6187 /* Word Nerd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Word Nerd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF3D2642356BC85008B6187 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BAF3D2692356BC85008B6187 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -57,6 +61,15 @@
 				BA685D0123580FF300DF0AA8 /* Search.swift */,
 			);
 			path = Responses;
+			sourceTree = "<group>";
+		};
+		BA685D0E235FDA8E00DF0AA8 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				BA685D0B235FD85800DF0AA8 /* WordNerd.xcdatamodeld */,
+				BA685D0F235FDAC800DF0AA8 /* DataController.swift */,
+			);
+			path = "Data Model";
 			sourceTree = "<group>";
 		};
 		BAF3D2582356BC85008B6187 = {
@@ -127,6 +140,7 @@
 		BAF3D27C2356BD2B008B6187 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BA685D0E235FDA8E00DF0AA8 /* Data Model */,
 				BAF3D27F2357C0BB008B6187 /* Wordnik Client */,
 				BA685CFC23580E0500DF0AA8 /* Responses */,
 			);
@@ -214,8 +228,10 @@
 			files = (
 				BAF3D2812357C0D4008B6187 /* WordnikClient.swift in Sources */,
 				BA685D0A235EA57B00DF0AA8 /* SavedWordsTableViewCell.swift in Sources */,
+				BA685D0D235FD85800DF0AA8 /* WordNerd.xcdatamodeld in Sources */,
 				BA685D0023580F0A00DF0AA8 /* WordOfTheDay.swift in Sources */,
 				BA685D06235CD17800DF0AA8 /* SavedWordsViewController.swift in Sources */,
+				BA685D10235FDAC800DF0AA8 /* DataController.swift in Sources */,
 				BA685CFE23580E1E00DF0AA8 /* RandomWord.swift in Sources */,
 				BA685D0223580FF300DF0AA8 /* Search.swift in Sources */,
 				BA685CFB2357C67700DF0AA8 /* DailyWordViewController.swift in Sources */,
@@ -418,6 +434,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BA685D0B235FD85800DF0AA8 /* WordNerd.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BA685D0C235FD85800DF0AA8 /* WordNerd.xcdatamodel */,
+			);
+			currentVersion = BA685D0C235FD85800DF0AA8 /* WordNerd.xcdatamodel */;
+			path = WordNerd.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BAF3D2592356BC85008B6187 /* Project object */;
 }
