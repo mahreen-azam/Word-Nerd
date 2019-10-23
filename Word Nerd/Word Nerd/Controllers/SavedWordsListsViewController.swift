@@ -117,6 +117,8 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let savedWordsVC = segue.destination as! SavedWordsViewController
+        savedWordsVC.dataController = self.dataController
+        
         if (wordToSave != nil) && (definitionToSave != nil) {
             savedWordsVC.savedWords.append(wordToSave!)
             savedWordsVC.savedDefintions.append(definitionToSave!)

@@ -7,21 +7,54 @@
 //
 
 import UIKit
+import CoreData
 
 class SavedWordsViewController: UIViewController, UITableViewDataSource {
     
+    // MARK: Global Variables
+    var dataController: DataController!
+    var fetchedResultsController:NSFetchedResultsController<Word>!
+    
     //MARK: Outlets
-    @IBOutlet weak var tableView: UITableView!   // Make these fields large enough to display defintion. If not, when you tap on it it should show you the whole definition. I perfer it all be on one vc. 
+    @IBOutlet weak var tableView: UITableView! 
     
     // MARK: Global Variables
     var savedWords = ["Hello", "Mom"] // There needs to be a fetch call made to get all the words for a list. The words passed from the last vc can only be appended after this fetch has been made. We'll probably have to update the code to add them 
     var savedDefintions = ["A greeting", "Female parent"]
     
+    // var savedWords2: String! // In our last VC, could we have updated the list to have a word associated with it?
+    
+    
+    fileprivate func setupFetchedResultsController() { // Update this to be all the words associated with this list!
+        let fetchRequest:NSFetchRequest<Word> = Word.fetchRequest()
+        fetchRequest.sortDescriptors = []
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "")
+        do {
+            try fetchedResultsController.performFetch()
+            print("yay")
+        } catch {
+            self.showFailure(title: "Failed to get saved lists", message: error.localizedDescription)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupFetchedResultsController()
+        
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 300
+    }
+    
+    func addSavedWords() {
+        let word = Word(context: dataController.viewContext)
+        word.name = "name"
+        word.definition = "def" // current word from before
+        try? dataController.viewContext.save()
+        
+        setupFetchedResultsController()
+        self.tableView.reloadData()
     }
     
     //MARK: Delete Saved Words Functions
@@ -29,9 +62,20 @@ class SavedWordsViewController: UIViewController, UITableViewDataSource {
         self.savedWords.remove(at: indexPath.row)
         self.savedDefintions.remove(at: indexPath.row)
         self.tableView.reloadData()
-        //        let notebookToDelete = fetchedResultsController.object(at: indexPath)
-        //        dataController.viewContext.delete(notebookToDelete)
-        //        try? dataController.viewContext.save()
+        
+        
+        let wordToDelete = fetchedResultsController.object(at: indexPath)
+        dataController.viewContext.delete(wordToDelete)
+        try? dataController.viewContext.save()
+        
+        setupFetchedResultsController()
+        self.tableView.reloadData()
+    }
+    
+    func showFailure(title: String, message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertVC, animated: true)
     }
     
     // Make the table not tappable. (Remove the arrow too) Add functionality for Quiz me. Update quize me button. Make the words be based off of the tapped list. Add core data and persistance. 
