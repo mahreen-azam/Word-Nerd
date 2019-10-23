@@ -37,7 +37,7 @@ class DailyWordViewController: UIViewController {
     
    // MARK: Button Functions
     @IBAction func saveWordTapped(_ sender: Any) {
-        print("save word tapped")
+        print("save word tapped") // You can probably delete this function 
 
     }
     
@@ -95,22 +95,9 @@ class DailyWordViewController: UIViewController {
 // Things to do:
 //- Add core data for:
 // --- Word of the Day: if a word has been called previously, the app should display that while loading new word
-// --- Saved Words Lists: The app should store all lists created. Make a model that associates saved words with lists.
-//  If a list is deleted, so are its saved words (pop an alert for this (?))
-// --- Saved Words: The app should store saved words.
-
-// Need to make two types of data to store: Lists and Words. Lists have a name. (Possibly a total words count as well, but that might be intuitive) Words have a word and a definition.
-//Lists are saved when a user creates one. they are deleted when a user deletes
-//Words are saved AFTER a user saves it to a list. They are associated with that list. They are deleted when a user deletes them from their list OR when the list is deleted.
-//Need to make fetch requests that creates arrays with the stored data. This data is what the tables use to display data. Remember to refresh table views after something is added or deleted.  
-
-
 
 // - Add functionality for: new word, search, quiz me (?)., for new word: have an option difficulty (?),
 // Make buttons and text pretty :)
-
-
-
 
 
 

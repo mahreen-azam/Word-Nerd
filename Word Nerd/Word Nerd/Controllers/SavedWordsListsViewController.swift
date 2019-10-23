@@ -50,6 +50,11 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setupFetchedResultsController()
+        self.tableView.reloadData()
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         wordToSave = nil
         definitionToSave = nil
@@ -117,12 +122,22 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let savedWordsVC = segue.destination as! SavedWordsViewController
-        savedWordsVC.dataController = self.dataController
-        
-        if (wordToSave != nil) && (definitionToSave != nil) {
-            savedWordsVC.savedWords.append(wordToSave!)
-            savedWordsVC.savedDefintions.append(definitionToSave!)
+       
+        if let indexPath = tableView.indexPathForSelectedRow {
+            savedWordsVC.dataController = self.dataController
+            
+            let listToAddWord = fetchedResultsController.object(at: indexPath)
+            savedWordsVC.list = listToAddWord
+            
+            if (wordToSave != nil) && (definitionToSave != nil) {
+                let wordToAdd = Word(context: dataController.viewContext)
+                wordToAdd.name = wordToSave!
+                wordToAdd.definition = definitionToSave!
+                wordToAdd.list = listToAddWord
+                try? dataController.viewContext.save()
+            }
         }
+        
     }
     
     // MARK: Table Functions
@@ -132,7 +147,7 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedWordsListsCell")!
-        let list =  fetchedResultsController.object(at: indexPath)
+        let list = fetchedResultsController.object(at: indexPath)
 
         cell.textLabel?.text = list.title
         cell.detailTextLabel?.text =  String(list.words!.count) + " words"

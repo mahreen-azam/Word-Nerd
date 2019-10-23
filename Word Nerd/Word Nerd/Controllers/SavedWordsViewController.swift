@@ -11,33 +11,30 @@ import CoreData
 
 class SavedWordsViewController: UIViewController, UITableViewDataSource {
     
+    // MARK: Outlets
+    @IBOutlet weak var tableView: UITableView!
+    
     // MARK: Global Variables
     var dataController: DataController!
     var fetchedResultsController:NSFetchedResultsController<Word>!
+    var list:List!
     
-    //MARK: Outlets
-    @IBOutlet weak var tableView: UITableView! 
-    
-    // MARK: Global Variables
-    var savedWords = ["Hello", "Mom"] // There needs to be a fetch call made to get all the words for a list. The words passed from the last vc can only be appended after this fetch has been made. We'll probably have to update the code to add them 
-    var savedDefintions = ["A greeting", "Female parent"]
-    
-    // var savedWords2: String! // In our last VC, could we have updated the list to have a word associated with it?
-    
-    
-    fileprivate func setupFetchedResultsController() { // Update this to be all the words associated with this list!
+    // MARK: Core Data Fetch Request function
+    fileprivate func setupFetchedResultsController() {
         let fetchRequest:NSFetchRequest<Word> = Word.fetchRequest()
         fetchRequest.sortDescriptors = []
+        let predicate: NSPredicate = NSPredicate(format: "list == %@", list)
+        fetchRequest.predicate = predicate
         
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "")
         do {
             try fetchedResultsController.performFetch()
-            print("yay")
         } catch {
             self.showFailure(title: "Failed to get saved lists", message: error.localizedDescription)
         }
     }
     
+    // MARK: View Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,24 +43,9 @@ class SavedWordsViewController: UIViewController, UITableViewDataSource {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 300
     }
-    
-    func addSavedWords() {
-        let word = Word(context: dataController.viewContext)
-        word.name = "name"
-        word.definition = "def" // current word from before
-        try? dataController.viewContext.save()
-        
-        setupFetchedResultsController()
-        self.tableView.reloadData()
-    }
-    
+
     //MARK: Delete Saved Words Functions
     func deleteSavedWords(at indexPath: IndexPath) {
-        self.savedWords.remove(at: indexPath.row)
-        self.savedDefintions.remove(at: indexPath.row)
-        self.tableView.reloadData()
-        
-        
         let wordToDelete = fetchedResultsController.object(at: indexPath)
         dataController.viewContext.delete(wordToDelete)
         try? dataController.viewContext.save()
@@ -72,21 +54,25 @@ class SavedWordsViewController: UIViewController, UITableViewDataSource {
         self.tableView.reloadData()
     }
     
+    //MARK: Helper Functions
     func showFailure(title: String, message: String) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertVC, animated: true)
     }
     
-    // Make the table not tappable. (Remove the arrow too) Add functionality for Quiz me. Update quize me button. Make the words be based off of the tapped list. Add core data and persistance. 
+    // Add functionality for Quiz me. Update quiz me button.
+    //MARK: Table View Functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return savedWords.count
+        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedWordsCell", for: indexPath) as! SavedWordsTableViewCell
-        cell.wordLabel.text = savedWords[indexPath.row]
-        cell.definitionLabel.text = savedDefintions[indexPath.row]
+        let word = fetchedResultsController.object(at: indexPath)
+
+        cell.wordLabel.text = word.name
+        cell.definitionLabel.text = word.definition
         
         return cell
     }
