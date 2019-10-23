@@ -49,6 +49,7 @@ class DailyWordViewController: UIViewController {
     @IBAction func newWordTapped(_ sender: Any) {
         print("new word tapped")  
         // Call "randomWord" endpoint. Save word. Call "Search" endpoint for that randomWord. Update UI for word and definition IF a success is returned. Else, show error and do not update UI.
+        WordnikClient.getRandomWord(completion: handleRandomWordResponse(success:error:))
     }
     
     @IBAction func searchButtonTapped(_ sender: Any) {
@@ -77,6 +78,27 @@ class DailyWordViewController: UIViewController {
             } else {
                 self.showFailure(title: "Failed to get Word of the Day", message: error?.localizedDescription ?? "")
             }
+        }
+    }
+    
+    func handleRandomWordResponse(success: RandomWord?, error: Error?) {
+        if success != nil {
+            print(success!.word)
+            // Need to call a search endpoint with this word so that I can get a defintion
+            // Also, need to save this word in this VC, so if the search call is successful, that can be my saved word
+            // I think I have to write code for both dictionaries, with a note that since wordnik's dictionary is down I'll have to use MW's dictionary.
+        } else {
+            self.showFailure(title: "Failed to get New Word", message: error?.localizedDescription ?? "")
+        }
+    }
+    
+    func handleSearchResponse(success: Search?, error: Error?) {
+        if success != nil {
+            print("search successful")
+            // Need to update UI and current word/def AND userdefaults with saved words. Maybe put those lines in a method that I can call. MAYBE: new word is disabled but is called "search word" that pops new screen and can search words
+            // I think I have to write code for both dictionaries, with a note that since wordnik's dictionary is down I'll have to use MW's dictionary.
+        } else {
+            self.showFailure(title: "Failed to find Defintion for New Word", message: error?.localizedDescription ?? "")
         }
     }
    
