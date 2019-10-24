@@ -8,6 +8,8 @@
 
 import Foundation
 
+// Update this to be for the Wordnik response body after endpoint is fixed
 struct Search: Codable {
-    let message: String     // Update this when endpoint is fixed 
+    let shortdef: [String]
 }
+

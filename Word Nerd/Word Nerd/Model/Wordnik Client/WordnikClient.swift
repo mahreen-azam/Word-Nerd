@@ -11,7 +11,8 @@ import Foundation
 class WordnikClient {
     
     //MARK: Global Variables
-    static let apiKey = "98bdnkzv80srv16d92cmn74sud66zrwefmux6qkj9o2hdmw08" 
+    static let apiKey = "98bdnkzv80srv16d92cmn74sud66zrwefmux6qkj9o2hdmw08"
+    static let merriamWebsterApiKey = "9c9f5f57-b76d-41bd-88cc-832b1cdcebd9"
     static var searchWord = ""
     
     enum Endpoints {
@@ -20,12 +21,17 @@ class WordnikClient {
         case wordOfTheDay
         case randomWord
         case search
+        case merriamWebsterSearch
         
         var stringValue: String {
             switch self {
             case .wordOfTheDay: return Endpoints.base + "v4/words.json/wordOfTheDay?api_key=" + apiKey
             case .randomWord: return Endpoints.base + "v4/words.json/randomWord?hasDictionaryDef=true&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&api_key=" + apiKey
-            case .search: return Endpoints.base + "v4/words.json/search/" + searchWord + "?allowRegex=false&caseSensitive=true&minCorpusCount=5&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=1&maxLength=-1&limit=10&api_key=" + apiKey   // This one isn't working right now, try the merriam webster one if it stays broken for long
+                
+            // This endpoint isn't working right now, until it is fixed, use the Merriam-Webster api for searching
+            case .search: return Endpoints.base + "v4/words.json/search/" + searchWord + "?allowRegex=false&caseSensitive=true&minCorpusCount=5&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=1&maxLength=-1&limit=10&api_key=" + apiKey
+                
+            case .merriamWebsterSearch: return "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + searchWord + "?key=" + merriamWebsterApiKey
             }
         }
         
@@ -79,9 +85,20 @@ class WordnikClient {
         }
     }
     
-    class func searchForDefinition(word:String, completion: @escaping (Search?, Error?) -> Void) {
+    class func searchForDefinition(word:String, completion: @escaping ([Search]?, Error?) -> Void) {
         searchWord.self = word
-        taskForGETRequest(url: Endpoints.search.url, responseType: Search.self){ response, error in
+       
+        // This is the get request that would have been made if the Wordnik Search Endpoint was working. For now, we will use the Merriam-Webster Search endpoint.
+        
+//        taskForGETRequest(url: Endpoints.search.url, responseType: Search.self){ response, error in
+//            if let response = response {
+//                completion(response, nil)
+//            } else {
+//                completion(nil, error)
+//            }
+//        }
+        
+        taskForGETRequest(url: Endpoints.merriamWebsterSearch.url, responseType: [Search].self){ response, error in
             if let response = response {
                 completion(response, nil)
             } else {
