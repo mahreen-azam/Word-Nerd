@@ -47,7 +47,6 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="saveWordTapped:" destination="1TH-ii-SkT" eventType="touchUpInside" id="vrS-YG-z7W"/>
                                             <segue destination="eBO-WS-JVe" kind="push" identifier="saveToSavedWordsLists" id="dEh-iZ-UsM"/>
                                         </connections>
                                     </button>
@@ -107,22 +106,101 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="search" id="Xmz-NE-YJo">
                             <connections>
                                 <action selector="searchButtonTapped:" destination="1TH-ii-SkT" id="YDl-qO-MHf"/>
+                                <segue destination="kEH-sN-Pm2" kind="presentation" identifier="search" id="VJq-oV-caX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="definitionLabel" destination="YLz-lb-KB1" id="FMB-5d-aAO"/>
                         <outlet property="loadingIndicator" destination="Lsl-6O-du5" id="Epi-72-ZZr"/>
-                        <outlet property="newWordButton" destination="YRI-nJ-mtz" id="7zB-bL-IPQ"/>
-                        <outlet property="saveWordButton" destination="Pmf-mp-OGA" id="97S-mB-jDf"/>
-                        <outlet property="searchButton" destination="Xmz-NE-YJo" id="iRf-wy-C66"/>
-                        <outlet property="viewSavedWordsButton" destination="24P-XJ-7tS" id="gYA-Fq-nQT"/>
                         <outlet property="wordLabel" destination="B5M-Ug-RcQ" id="hwf-MW-vi5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WPy-Rz-NmN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1269.5999999999999" y="19.340329835082461"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="acT-Bc-21t">
+            <objects>
+                <viewController id="kEH-sN-Pm2" userLabel="Search View Controller" customClass="SearchViewController" customModule="Word_Nerd" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vfl-4O-Dhq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gC1-0V-1lL">
+                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Search" id="q3f-qM-d1X">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="pc6-hr-eio">
+                                            <connections>
+                                                <action selector="tapCancelButton:" destination="kEH-sN-Pm2" id="V8J-8F-jHO"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter a word to search for it's defintion: " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ryf-RU-5Eb">
+                                <rect key="frame" x="15" y="125" width="384" height="99"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mlb-mr-2UL">
+                                <rect key="frame" x="192" y="522" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAu-ZN-9Zl">
+                                <rect key="frame" x="81" y="529" width="252" height="40"/>
+                                <color key="backgroundColor" red="0.28094696460000002" green="0.49432411529999998" blue="0.23657014700000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                <state key="normal" title="Search">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="newWordTapped:" destination="1TH-ii-SkT" eventType="touchUpInside" id="bAJ-gT-PlH"/>
+                                    <action selector="tapSearchButton:" destination="hYd-ZR-ly4" eventType="touchUpInside" id="fuG-KZ-Wlw"/>
+                                    <action selector="tapSearchButton:" destination="kEH-sN-Pm2" eventType="touchUpInside" id="nhv-dE-BrF"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Tap here to enter word" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g5x-gp-sVP">
+                                <rect key="frame" x="81" y="243" width="252" height="30"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="kEH-sN-Pm2" id="rEa-0K-Uvh"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.99591439962387085" green="0.97657793760299683" blue="0.89801836013793945" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="3wn-tt-36D" firstAttribute="trailing" secondItem="g5x-gp-sVP" secondAttribute="trailing" constant="81" id="28e-Za-rIk"/>
+                            <constraint firstItem="DAu-ZN-9Zl" firstAttribute="leading" secondItem="3wn-tt-36D" secondAttribute="leading" constant="81" id="6GJ-Sa-j82"/>
+                            <constraint firstItem="gC1-0V-1lL" firstAttribute="leading" secondItem="3wn-tt-36D" secondAttribute="leading" id="6fx-A2-Fe3"/>
+                            <constraint firstItem="3wn-tt-36D" firstAttribute="trailing" secondItem="DAu-ZN-9Zl" secondAttribute="trailing" constant="81" id="XIz-BW-rvP"/>
+                            <constraint firstItem="3wn-tt-36D" firstAttribute="bottom" secondItem="DAu-ZN-9Zl" secondAttribute="bottom" constant="167" id="aDh-dz-VMR"/>
+                            <constraint firstItem="gC1-0V-1lL" firstAttribute="top" secondItem="3wn-tt-36D" secondAttribute="top" id="aHw-a1-FHp"/>
+                            <constraint firstItem="ryf-RU-5Eb" firstAttribute="top" secondItem="gC1-0V-1lL" secondAttribute="bottom" constant="61" id="hD5-wF-IRD"/>
+                            <constraint firstItem="g5x-gp-sVP" firstAttribute="centerX" secondItem="vfl-4O-Dhq" secondAttribute="centerX" id="hRp-Ne-7HX"/>
+                            <constraint firstItem="g5x-gp-sVP" firstAttribute="centerY" secondItem="vfl-4O-Dhq" secondAttribute="centerY" constant="-110" id="imK-UO-xDu"/>
+                            <constraint firstItem="gC1-0V-1lL" firstAttribute="trailing" secondItem="3wn-tt-36D" secondAttribute="trailing" id="jY8-mF-nzR"/>
+                            <constraint firstItem="ryf-RU-5Eb" firstAttribute="centerX" secondItem="vfl-4O-Dhq" secondAttribute="centerX" id="jmE-9q-ZdL"/>
+                            <constraint firstItem="g5x-gp-sVP" firstAttribute="leading" secondItem="3wn-tt-36D" secondAttribute="leading" constant="81" id="oTu-zB-lzf"/>
+                            <constraint firstItem="3wn-tt-36D" firstAttribute="bottom" secondItem="ryf-RU-5Eb" secondAttribute="bottom" constant="512" id="rOS-aN-aO8"/>
+                            <constraint firstItem="3wn-tt-36D" firstAttribute="trailing" secondItem="ryf-RU-5Eb" secondAttribute="trailing" constant="15" id="z2c-B0-Llb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3wn-tt-36D"/>
+                    </view>
+                    <connections>
+                        <outlet property="searchButton" destination="DAu-ZN-9Zl" id="XIr-wQ-cgm"/>
+                        <outlet property="searchField" destination="g5x-gp-sVP" id="So4-yW-IGp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Bh-Ci-9lB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="hYd-ZR-ly4" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1269.5652173913045" y="766.304347826087"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SXP-yb-Uo1">
@@ -317,6 +395,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="YoE-5X-Ueh"/>
+        <segue reference="dEh-iZ-UsM"/>
     </inferredMetricsTieBreakers>
 </document>
