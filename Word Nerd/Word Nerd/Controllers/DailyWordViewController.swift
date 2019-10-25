@@ -26,15 +26,26 @@ class DailyWordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let hasStoredWord = UserDefaults.standard.value(forKey: "HasSavedWord") {
+//        if let hasStoredWord = UserDefaults.standard.value(forKey: "HasSavedWord") {
+//            if hasStoredWord as! Bool {
+//                self.wordLabel.text = UserDefaults.standard.value(forKey: "StoredWord") as! String
+//                self.definitionLabel.text = UserDefaults.standard.value(forKey: "StoredDefinition") as! String
+//            }
+//        }
+        
+        loadingIndicator.isHidden = false
+        WordnikClient.getWordOfTheDay(completion: handleWordOfDayResponse(success:error:))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let hasStoredWord = UserDefaults.standard.value(forKey: "HasSavedWord") { // need to update current word and def because of search response
             if hasStoredWord as! Bool {
                 self.wordLabel.text = UserDefaults.standard.value(forKey: "StoredWord") as! String
                 self.definitionLabel.text = UserDefaults.standard.value(forKey: "StoredDefinition") as! String
             }
         }
         
-        loadingIndicator.isHidden = false
-        WordnikClient.getWordOfTheDay(completion: handleWordOfDayResponse(success:error:))
+      // updateUI()
     }
     
     @IBAction func newWordTapped(_ sender: Any) {
@@ -45,7 +56,7 @@ class DailyWordViewController: UIViewController {
     @IBAction func searchButtonTapped(_ sender: Any) {
         print("search tapped")
         
-        // Show an alert (?) modal presentation (?) that allows the user to enter the word that they want to search.
+        // Show modal presentation (?) that allows the user to enter the word that they want to search.
         //  Call "Search" endpoint for the user's endpoint. Update UI for word and definition IF a success is returned. Else, show error and do not update UI. Alert: sorry we could not find a defintion for that word
     }
     
@@ -92,13 +103,15 @@ class DailyWordViewController: UIViewController {
     
     // MARK: Helper Functions
     func updateUI() {
-        UserDefaults.standard.setValue(true, forKey: "HasSavedWord")
-        
-        self.wordLabel.text = self.currentWord
-        UserDefaults.standard.setValue(self.currentWord, forKey: "StoredWord")
-        
-        self.definitionLabel.text = self.currentDefintion
-        UserDefaults.standard.setValue(self.currentDefintion, forKey: "StoredDefinition")
+        if self.currentDefintion != nil && self.currentDefintion != nil {
+            UserDefaults.standard.setValue(true, forKey: "HasSavedWord")
+            
+            self.wordLabel.text = self.currentWord
+            UserDefaults.standard.setValue(self.currentWord, forKey: "StoredWord")
+            
+            self.definitionLabel.text = self.currentDefintion
+            UserDefaults.standard.setValue(self.currentDefintion, forKey: "StoredDefinition")
+        }
     }
     
     func showFailure(title: String, message: String) {
@@ -126,7 +139,7 @@ class DailyWordViewController: UIViewController {
 }
 
 // Things to do:
-// - Add functionality for: search, quiz me (?)
+// - Add functionality for: search, quiz me (?) remove quiz me
 // Make buttons and text pretty :)
 
 // In readme: make note of wordnik search endpoint being down and why commented out code is present

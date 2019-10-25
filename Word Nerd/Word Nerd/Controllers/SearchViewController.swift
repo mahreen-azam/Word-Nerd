@@ -14,6 +14,10 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
     
+    // MARK: Global Variables:
+    var searchWord: String?
+   // var searchDefinition: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,6 +33,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     @IBAction func tapSearchButton(_ sender: Any) {
         print("search tapped")
         if let searchEntry = searchField.text {
+            self.searchWord = searchEntry
             WordnikClient.searchForDefinition(word: searchEntry, completion: self.handleSearchResponse(success:error:))
         }
     }
@@ -38,7 +43,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         DispatchQueue.main.async {
             
             if success != nil {
-                print("Found word")
+                 UserDefaults.standard.setValue(true, forKey: "HasSavedWord")
+                 UserDefaults.standard.setValue(self.searchWord! + ":", forKey: "StoredWord")
+                 UserDefaults.standard.setValue(success![0].shortdef[0], forKey: "StoredDefinition")
+                self.dismiss(animated: true, completion: nil)
+                
 //                self.currentWord = self.newWord
 //                self.currentDefintion = success![0].shortdef[0]
 //                self.updateUI()
@@ -55,6 +64,14 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         present(alertVC, animated: true)
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) { // This isn't actually called when dismissed. You may need to use "delegates"
+//        let dailyWordVC = segue.destination as! DailyWordViewController
+//        
+//        if (searchWord != nil) && (searchDefinition != nil) {
+//            dailyWordVC.currentWord = searchWord!
+//            dailyWordVC.currentDefintion = searchDefinition!
+//        }
+//    }
     
     // MARK: Text Delegate Functions:
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -81,6 +98,3 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     }
 
 }
-
-
-// Call search endpoint and either dismiss and update UI or, show an alert. Need to pass new word and def to daily word vc. 
