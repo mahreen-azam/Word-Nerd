@@ -87,16 +87,16 @@ class WordnikClient {
     
     class func searchForDefinition(word:String, completion: @escaping ([Search]?, Error?) -> Void) {
         searchWord.self = word
-       
+        
         // This is the get request that would have been made if the Wordnik Search Endpoint was working. For now, we will use the Merriam-Webster Search endpoint.
         
-//        taskForGETRequest(url: Endpoints.search.url, responseType: Search.self){ response, error in
-//            if let response = response {
-//                completion(response, nil)
-//            } else {
-//                completion(nil, error)
-//            }
-//        }
+        //        taskForGETRequest(url: Endpoints.search.url, responseType: Search.self){ response, error in
+        //            if let response = response {
+        //                completion(response, nil)
+        //            } else {
+        //                completion(nil, error)
+        //            }
+        //        }
         
         taskForGETRequest(url: Endpoints.merriamWebsterSearch.url, responseType: [Search].self){ response, error in
             if let response = response {

@@ -43,7 +43,7 @@ class SavedWordsViewController: UIViewController, UITableViewDataSource {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 300
     }
-
+    
     //MARK: Delete Saved Words Functions
     func deleteSavedWords(at indexPath: IndexPath) {
         let wordToDelete = fetchedResultsController.object(at: indexPath)
@@ -69,7 +69,7 @@ class SavedWordsViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedWordsCell", for: indexPath) as! SavedWordsTableViewCell
         let word = fetchedResultsController.object(at: indexPath)
-
+        
         cell.wordLabel.text = word.name
         cell.definitionLabel.text = word.definition
         

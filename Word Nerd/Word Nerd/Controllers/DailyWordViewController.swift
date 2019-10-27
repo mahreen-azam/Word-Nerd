@@ -89,15 +89,13 @@ class DailyWordViewController: UIViewController {
     
     // MARK: Helper Functions
     func updateUI() {
-        if self.currentDefintion != nil && self.currentDefintion != nil { // Remove this?
-            UserDefaults.standard.setValue(true, forKey: "HasSavedWord")
-            
-            self.wordLabel.text = self.currentWord
-            UserDefaults.standard.setValue(self.currentWord, forKey: "StoredWord")
-            
-            self.definitionLabel.text = self.currentDefintion
-            UserDefaults.standard.setValue(self.currentDefintion, forKey: "StoredDefinition")
-        }
+        UserDefaults.standard.setValue(true, forKey: "HasSavedWord")
+        
+        self.wordLabel.text = self.currentWord
+        UserDefaults.standard.setValue(self.currentWord, forKey: "StoredWord")
+        
+        self.definitionLabel.text = self.currentDefintion
+        UserDefaults.standard.setValue(self.currentDefintion, forKey: "StoredDefinition")
     }
     
     func showFailure(title: String, message: String) {
@@ -121,10 +119,4 @@ class DailyWordViewController: UIViewController {
             }
         }
     }
-    
 }
-
-// Things to do:
-// Make buttons and text pretty :)
-
-// In readme: make note of wordnik search endpoint being down and why commented out code is present

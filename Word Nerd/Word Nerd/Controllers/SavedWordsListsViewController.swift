@@ -78,7 +78,6 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
         }
         saveAction.isEnabled = false
         
-        // Enables save button after text field has text
         alert.addTextField { textField in
             textField.placeholder = "New List Name"
             NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: .main) { notif in

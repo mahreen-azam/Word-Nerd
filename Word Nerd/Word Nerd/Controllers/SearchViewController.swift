@@ -19,7 +19,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         searchButton.isEnabled = false
         searchButton.setTitleColor(UIColor.darkGray, for: UIControl.State.disabled)
     }
@@ -42,9 +42,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         DispatchQueue.main.async {
             
             if success != nil {
-                 UserDefaults.standard.setValue(true, forKey: "HasSavedWord")
-                 UserDefaults.standard.setValue(self.searchWord!, forKey: "StoredWord")
-                 UserDefaults.standard.setValue(success![0].shortdef[0], forKey: "StoredDefinition")
+                UserDefaults.standard.setValue(true, forKey: "HasSavedWord")
+                UserDefaults.standard.setValue(self.searchWord!, forKey: "StoredWord")
+                UserDefaults.standard.setValue(success![0].shortdef[0], forKey: "StoredDefinition")
                 self.dismiss(animated: true, completion: nil)
             } else {
                 self.showFailure(title: "Failed to find Defintion for Searched Word", message: "Sorry, the Merriam-Webster dictionary does not have the defintion for: " + self.searchField.text!)
