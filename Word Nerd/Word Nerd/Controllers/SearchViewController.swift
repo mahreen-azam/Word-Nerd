@@ -30,7 +30,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func tapSearchButton(_ sender: Any) {
-        print("search tapped")
         if let searchEntry = searchField.text {
             WordnikClient.searchForDefinition(word: searchEntry, completion: self.handleSearchResponse(success:error:))
             self.searchWord = searchEntry + ":"
@@ -40,8 +39,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     // MARK: Response Handlers
     func handleSearchResponse(success: [Search]?, error: Error?) {
         DispatchQueue.main.async {
-            
-            if success != nil {
+            if (success != nil) && (success!.count > 0) && (success![0].shortdef.count > 0) {
                 UserDefaults.standard.setValue(true, forKey: "HasSavedWord")
                 UserDefaults.standard.setValue(self.searchWord!, forKey: "StoredWord")
                 UserDefaults.standard.setValue(success![0].shortdef[0], forKey: "StoredDefinition")

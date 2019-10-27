@@ -77,7 +77,7 @@ class DailyWordViewController: UIViewController {
         DispatchQueue.main.async {
             self.loadingIndicator.isHidden = true
             
-            if success != nil {
+            if (success != nil) && (success!.count > 0) && (success![0].shortdef.count > 0) {
                 self.currentWord = self.newWord! + ":"
                 self.currentDefintion = success![0].shortdef[0]
                 self.updateUI()
