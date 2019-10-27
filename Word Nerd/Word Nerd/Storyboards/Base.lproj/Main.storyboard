@@ -28,11 +28,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry, defintion not available. " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLz-lb-KB1">
-                                <rect key="frame" x="58" y="216.66666666666663" width="326" height="150"/>
+                                <rect key="frame" x="58" y="217" width="326" height="210"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="bCb-8t-OZx"/>
+                                    <constraint firstAttribute="height" constant="210" id="bCb-8t-OZx"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -118,7 +118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WPy-Rz-NmN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1269.5999999999999" y="19.340329835082461"/>
+            <point key="canvasLocation" x="1269.5652173913045" y="18.75"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="acT-Bc-21t">
@@ -317,7 +317,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u1P-Ww-Zg8">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="648"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SavedWordsCell" id="re6-2Z-HpI" customClass="SavedWordsTableViewCell" customModule="Word_Nerd" customModuleProvider="target">
@@ -362,24 +362,13 @@
                                     <outlet property="delegate" destination="obz-Oz-G5S" id="BAA-E1-y3J"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ry7-m0-LVl">
-                                <rect key="frame" x="81" y="667" width="252" height="40"/>
-                                <color key="backgroundColor" red="0.28094696460000002" green="0.49432411529999998" blue="0.23657014700000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
-                                <state key="normal" title="Quiz Me!">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="u1P-Ww-Zg8" secondAttribute="trailing" id="3sn-tQ-hB2"/>
                             <constraint firstItem="u1P-Ww-Zg8" firstAttribute="top" secondItem="LpW-Ir-pIZ" secondAttribute="top" id="EvY-1u-by9"/>
                             <constraint firstItem="u1P-Ww-Zg8" firstAttribute="leading" secondItem="LpW-Ir-pIZ" secondAttribute="leading" id="PT0-gw-u0j"/>
-                            <constraint firstItem="ry7-m0-LVl" firstAttribute="top" secondItem="u1P-Ww-Zg8" secondAttribute="bottom" constant="19" id="UXJ-OD-LZ7"/>
-                            <constraint firstItem="TDd-xs-0Qq" firstAttribute="top" secondItem="u1P-Ww-Zg8" secondAttribute="bottom" constant="88" id="X7G-Ni-b0A"/>
-                            <constraint firstItem="ry7-m0-LVl" firstAttribute="centerX" secondItem="u1P-Ww-Zg8" secondAttribute="centerX" id="dnd-hC-Vhh"/>
-                            <constraint firstItem="ry7-m0-LVl" firstAttribute="leading" secondItem="7sh-Lp-UHO" secondAttribute="leading" constant="81" id="gJi-fu-jEO"/>
+                            <constraint firstItem="u1P-Ww-Zg8" firstAttribute="bottom" secondItem="TDd-xs-0Qq" secondAttribute="top" id="vb1-LN-D62"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7sh-Lp-UHO"/>
                     </view>

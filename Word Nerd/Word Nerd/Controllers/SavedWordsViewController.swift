@@ -61,7 +61,6 @@ class SavedWordsViewController: UIViewController, UITableViewDataSource {
         present(alertVC, animated: true)
     }
     
-    // Add functionality for Quiz me. Update quiz me button.
     //MARK: Table View Functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
@@ -85,4 +84,3 @@ class SavedWordsViewController: UIViewController, UITableViewDataSource {
     }
 }
 
-//Bonus Feature: add an "Add" button that allows the user to manually save a word and defintion to the list 

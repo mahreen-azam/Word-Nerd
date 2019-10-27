@@ -137,7 +137,6 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
                 try? dataController.viewContext.save()
             }
         }
-        
     }
     
     // MARK: Table Functions
@@ -150,7 +149,11 @@ class SavedWordsListsViewController: UIViewController, UITableViewDataSource {
         let list = fetchedResultsController.object(at: indexPath)
 
         cell.textLabel?.text = list.title
-        cell.detailTextLabel?.text =  String(list.words!.count) + " words"
+        if list.words!.count == 1 {
+            cell.detailTextLabel?.text =  String(list.words!.count) + " word"
+        } else {
+            cell.detailTextLabel?.text =  String(list.words!.count) + " words"
+        }
        
         return cell
     }

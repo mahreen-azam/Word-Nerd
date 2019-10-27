@@ -16,7 +16,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Global Variables:
     var searchWord: String?
-   // var searchDefinition: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +32,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     @IBAction func tapSearchButton(_ sender: Any) {
         print("search tapped")
         if let searchEntry = searchField.text {
-            self.searchWord = searchEntry
             WordnikClient.searchForDefinition(word: searchEntry, completion: self.handleSearchResponse(success:error:))
+            self.searchWord = searchEntry + ":"
         }
     }
     
@@ -44,13 +43,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
             
             if success != nil {
                  UserDefaults.standard.setValue(true, forKey: "HasSavedWord")
-                 UserDefaults.standard.setValue(self.searchWord! + ":", forKey: "StoredWord")
+                 UserDefaults.standard.setValue(self.searchWord!, forKey: "StoredWord")
                  UserDefaults.standard.setValue(success![0].shortdef[0], forKey: "StoredDefinition")
                 self.dismiss(animated: true, completion: nil)
-                
-//                self.currentWord = self.newWord
-//                self.currentDefintion = success![0].shortdef[0]
-//                self.updateUI()
             } else {
                 self.showFailure(title: "Failed to find Defintion for Searched Word", message: "Sorry, the Merriam-Webster dictionary does not have the defintion for: " + self.searchField.text!)
             }
@@ -63,15 +58,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertVC, animated: true)
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) { // This isn't actually called when dismissed. You may need to use "delegates"
-//        let dailyWordVC = segue.destination as! DailyWordViewController
-//        
-//        if (searchWord != nil) && (searchDefinition != nil) {
-//            dailyWordVC.currentWord = searchWord!
-//            dailyWordVC.currentDefintion = searchDefinition!
-//        }
-//    }
     
     // MARK: Text Delegate Functions:
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -96,5 +82,4 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         
         return true
     }
-
 }
